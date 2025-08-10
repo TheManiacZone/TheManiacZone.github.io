@@ -1,6 +1,6 @@
 // Simple array of posts (you update this when you add new pages)
 const posts = [
-    { title: "Example Page", description: "An example of a branching page.", url: "posts/example.html" }
+    { title: "Example Page", description: "An example of a branching page.", url: "example.html"" }
 ];
 
 // Insert posts into homepage
