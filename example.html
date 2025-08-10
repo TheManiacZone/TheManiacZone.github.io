@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Page</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Example Page</h1>
+        <p><a href="../index.html">← Back to Home</a></p>
+    </header>
+
+    <main>
+        <p>This is an example page. You can write text here, add images, videos, and more.</p>
+
+        <h2>Image Example</h2>
+        <img src="../assets/sample.jpg" alt="Sample" style="max-width:100%; border-radius:8px;">
+
+        <h2>Embedded YouTube Video</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            title="YouTube video" frameborder="0" allowfullscreen></iframe>
+
+        <h2>Audio Example</h2>
+        <audio controls>
+            <source src="../assets/sample.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> My Cozy Hub</p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
