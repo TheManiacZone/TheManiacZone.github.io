@@ -1,6 +1,6 @@
 :root {
   --bg-color: #dceeff;  /* pastel light blue */
-  --accent-color: #000; /* pastel pink */
+  --accent-color: #000; /* black */
   --text-color: #2b2b2b;
   --link-hover: #e89a9a;
 }
@@ -78,3 +78,4 @@ footer {
   color: #666;
 
 }
+
