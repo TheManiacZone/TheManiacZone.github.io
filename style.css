@@ -1,6 +1,6 @@
 :root {
   --bg-color: #dceeff;  /* pastel light blue */
-  --accent-color: #f4c2c2; /* pastel pink */
+  --accent-color: #000; /* pastel pink */
   --text-color: #2b2b2b;
   --link-hover: #e89a9a;
 }
@@ -76,4 +76,5 @@ footer {
   text-align: center;
   font-size: 0.9rem;
   color: #666;
+
 }
