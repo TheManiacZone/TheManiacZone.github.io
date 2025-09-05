@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Letters - The Maniac Zone</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    
 </head>
 <body>
   <!-- Navigation -->
@@ -86,24 +84,23 @@
     document.querySelectorAll('.open-letter').forEach(btn => {
       btn.addEventListener('click', () => {
         const modal = document.getElementById(btn.dataset.target);
-        modal.style.display = 'block';
+        modal.classList.add('show'); // ✅ use class for smooth animation
       });
     });
 
     // Close modal with X
     document.querySelectorAll('.letter-modal .close').forEach(span => {
       span.addEventListener('click', () => {
-        span.closest('.letter-modal').style.display = 'none';
+        span.closest('.letter-modal').classList.remove('show');
       });
     });
 
     // Close modal if clicking outside content
     window.addEventListener('click', (e) => {
       if (e.target.classList.contains('letter-modal')) {
-        e.target.style.display = 'none';
+        e.target.classList.remove('show');
       }
     });
   </script>
 </body>
 </html>
-
