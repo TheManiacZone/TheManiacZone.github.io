@@ -1,8 +1,8 @@
 :root {
-  --bg-color: #dceeff;  /* pastel light blue */
-  --accent-color: #000; /* black */
+  --bg-color: #dceeff;   /* pastel light blue */
+  --accent-color: #000;  /* black */
   --text-color: #2b2b2b;
-  --link-hover: #e89a9a;
+  --link-hover: #d94a67; /* soft pink/red hover */
 }
 
 * {
@@ -21,10 +21,43 @@ body {
   margin: auto;
 }
 
+/* ----------------- */
+/* Navigation Bar */
+/* ----------------- */
+.top-nav {
+  background-color: #cfddee;
+  padding: 10px 0;
+  border-bottom: 2px solid #333;
+  margin-bottom: 20px;
+}
+
+.top-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.top-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  transition: color 0.3s;
+}
+
+.top-nav a:hover {
+  color: var(--link-hover);
+}
+
+/* ----------------- */
 /* Header */
+/* ----------------- */
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 header h1 {
@@ -37,45 +70,22 @@ header p {
   color: #444;
 }
 
-/* Links */
-a {
-  color: var(--accent-color);
-  text-decoration: none;
+/* ----------------- */
+/* Intro Section */
+/* ----------------- */
+.intro {
+  margin: 30px auto;
+  max-width: 700px;
+  text-align: left;
+  font-size: 1rem;
 }
 
-a:hover {
-  color: var(--link-hover);
-}
-
-/* Post list */
-#post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.post-link {
-  background: white;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-}
-
-.post-link:hover {
-  transform: translateY(-3px);
-}
-
-.post-link h2 {
-  margin-bottom: 5px;
-}
-
+/* ----------------- */
 /* Footer */
+/* ----------------- */
 footer {
-  margin-top: 40px;
+  margin-top: 50px;
   text-align: center;
   font-size: 0.9rem;
   color: #666;
-
 }
-
