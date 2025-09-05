@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letters - The Maniac Zone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="letters.html">Letters</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="games.html">Minigames</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Letters</h1>
+    <p>Notes, writings, and messages archived here.</p>
+  </header>
+
+  <!-- Letters List -->
+  <main class="letters-container">
+    <article class="letter-card">
+      <h2>Letter One</h2>
+      <p class="preview">This is the first letter preview…</p>
+      <a href="letters/letter1.html">Read more →</a>
+    </article>
+
+    <article class="letter-card">
+      <h2>Letter Two</h2>
+      <p class="preview">Another letter preview goes here…</p>
+      <a href="letters/letter2.html">Read more →</a>
+    </article>
+
+    <article class="letter-card">
+      <h2>Letter Three</h2>
+      <p class="preview">And here’s a third sample letter…</p>
+      <a href="letters/letter3.html">Read more →</a>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> The Maniac Zone / Arakdiel Minesweeping Company</p>
+  </footer>
+
+  <script>
+    // Auto-update year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
