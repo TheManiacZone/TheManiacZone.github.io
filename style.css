@@ -5,6 +5,9 @@
   --link-hover: #d94a67; /* soft pink/red hover */
 }
 
+/* ----------------- */
+/* Reset & Global */
+/* ----------------- */
 * {
   margin: 0;
   padding: 0;
@@ -36,8 +39,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin: 0;
-  padding: 0;
 }
 
 .top-nav a {
@@ -71,13 +72,82 @@ header p {
 }
 
 /* ----------------- */
-/* Intro Section */
+/* Letters Cards */
 /* ----------------- */
-.intro {
-  margin: 30px auto;
-  max-width: 700px;
-  text-align: left;
-  font-size: 1rem;
+.letters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.letter-card {
+  background-color: #eef5ff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.letter-card h2 {
+  margin-bottom: 10px;
+}
+
+.letter-card .preview {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.letter-card button.open-letter {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.letter-card button.open-letter:hover {
+  background-color: var(--link-hover);
+}
+
+/* ----------------- */
+/* Modal Styles */
+/* ----------------- */
+.letter-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  overflow: auto;
+}
+
+.letter-modal .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.letter-modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ----------------- */
