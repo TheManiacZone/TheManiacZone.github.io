@@ -76,22 +76,24 @@
     <p>&copy; <span id="year"></span> The Maniac Zone / Arakdiel Minesweeping Company</p>
   </footer>
 
+  <!-- Scripts -->
   <script>
     // Auto-update year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Open modal
+    // Function to open modal
     document.querySelectorAll('.open-letter').forEach(btn => {
       btn.addEventListener('click', () => {
         const modal = document.getElementById(btn.dataset.target);
-        modal.classList.add('show'); // ✅ use class for smooth animation
+        if (modal) modal.classList.add('show');
       });
     });
 
-    // Close modal with X
+    // Function to close modal with X
     document.querySelectorAll('.letter-modal .close').forEach(span => {
       span.addEventListener('click', () => {
-        span.closest('.letter-modal').classList.remove('show');
+        const modal = span.closest('.letter-modal');
+        if (modal) modal.classList.remove('show');
       });
     });
 
