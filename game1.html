@@ -12,19 +12,19 @@
     }
 
     .game-container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 20px;
     }
 
     #current-number {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin: 20px 0;
       color: #1a1a1a;
     }
 
     button#generate-btn {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       padding: 10px 20px;
       cursor: pointer;
       border-radius: 8px;
@@ -44,46 +44,60 @@
     }
 
     #comment-box {
-      margin-top: 20px;
+      margin-top: 15px;
       font-weight: bold;
       color: #d94a67;
       min-height: 1.5em;
     }
 
-    /* Vertical Progress Bar */
-    #progress-bar-vertical {
-      position: relative;
-      width: 140px;
-      height: 600px;
-      background: #eef5ff;
+    /* Vertical Progress Bar Container */
+    #progress-bar-container {
+      display: flex;
+      justify-content: center;
       margin: 30px auto;
-      border-radius: 10px;
-      padding: 10px 0;
     }
 
+    #progress-bar-vertical {
+      position: relative;
+      width: 50px;
+      height: 600px;
+      background: #eef5ff;
+      border-radius: 10px;
+      margin-right: 100px; /* space for images + numbers */
+    }
+
+    /* Presets on side */
     .preset {
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 60px;
       display: flex;
       align-items: center;
       gap: 5px;
     }
 
     .preset img {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
     }
 
-    #player-marker {
+    .preset span {
+      font-size: 0.8rem;
+    }
+
+    /* Player horizontal line */
+    #player-line {
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 12px;
+      left: 0;
+      width: 100%;
+      height: 3px;
       background-color: #d94a67;
-      border-radius: 50%;
-      transition: bottom 0.5s ease;
+    }
+
+    #player-number {
+      position: absolute;
+      left: 110%;
+      font-size: 0.9rem;
+      color: #d94a67;
     }
 
     /* Navigation fixes */
@@ -112,24 +126,32 @@
 
     <div id="comment-box"></div>
 
-    <div id="progress-bar-vertical">
-      <!-- Example presets: you can add 20+ more -->
-      <div class="preset" data-value="500000" style="bottom:3%">
-        <img src="furina.png" alt="Furina"><span>Furina</span>
+    <div id="progress-bar-container">
+      <div id="progress-bar-vertical">
+        <!-- Example presets -->
+        <div class="preset" data-value="500000">
+          <img src="furina.png" alt="Furina">
+          <span>500,000</span>
+        </div>
+        <div class="preset" data-value="2000000">
+          <img src="friendA.png" alt="Friend A">
+          <span>2,000,000</span>
+        </div>
+        <div class="preset" data-value="5000000">
+          <img src="friendB.png" alt="Friend B">
+          <span>5,000,000</span>
+        </div>
+        <div class="preset" data-value="10000000">
+          <img src="legendary.png" alt="Legendary">
+          <span>10,000,000</span>
+        </div>
+        <div class="preset" data-value="17000000">
+          <img src="ultimate.png" alt="Ultimate">
+          <span>17,000,000</span>
+        </div>
+
+        <div id="player-line"><span id="player-number">0</span></div>
       </div>
-      <div class="preset" data-value="2000000" style="bottom:10%">
-        <img src="friendA.png" alt="Friend A"><span>Friend A</span>
-      </div>
-      <div class="preset" data-value="5000000" style="bottom:25%">
-        <img src="friendB.png" alt="Friend B"><span>Friend B</span>
-      </div>
-      <div class="preset" data-value="10000000" style="bottom:50%">
-        <img src="legendary.png" alt="Legendary"><span>Legendary</span>
-      </div>
-      <div class="preset" data-value="17000000" style="bottom:85%">
-        <img src="ultimate.png" alt="Ultimate"><span>Ultimate</span>
-      </div>
-      <div id="player-marker"></div>
     </div>
   </div>
 
@@ -138,7 +160,8 @@
     const currentNumberDisplay = document.getElementById('current-number');
     const commentBox = document.getElementById('comment-box');
     const presetCards = document.querySelectorAll('.preset');
-    const playerMarker = document.getElementById('player-marker');
+    const playerLine = document.getElementById('player-line');
+    const playerNumber = document.getElementById('player-number');
     const progressBar = document.getElementById('progress-bar-vertical');
 
     let maxNumber = 0;
@@ -147,21 +170,32 @@
     function getRandomNumber() {
       const rand = Math.random();
       let num;
-      // ~20% harder than previous version
-      if (rand < 0.72) { // 72% small
+      // ~20% harder
+      if (rand < 0.72) { 
         num = Math.floor(Math.random() * 999000) + 1000;
-      } else if (rand < 0.94) { // 22% medium
+      } else if (rand < 0.94) { 
         num = Math.floor(Math.random() * 9000000) + 1000000;
-      } else { // 6% large
+      } else { 
         num = Math.floor(Math.random() * 10000000) + 10000000;
       }
       return num;
     }
 
-    function updatePlayerMarker() {
+    function updatePlayerLine() {
       const percent = Math.min(maxNumber / MAX_VALUE, 1);
       const barHeight = progressBar.offsetHeight;
-      playerMarker.style.bottom = (percent * barHeight) + 'px';
+      playerLine.style.bottom = (percent * barHeight) + 'px';
+      playerNumber.style.bottom = (percent * barHeight - 10) + 'px';
+      playerNumber.textContent = maxNumber.toLocaleString();
+    }
+
+    function positionPresets() {
+      presetCards.forEach(card => {
+        const value = parseInt(card.dataset.value);
+        const percent = Math.min(value / MAX_VALUE, 1);
+        const barHeight = progressBar.offsetHeight;
+        card.style.bottom = (percent * barHeight - 10) + 'px'; // align nicely
+      });
     }
 
     function generateNumber() {
@@ -170,9 +204,8 @@
 
       if (num > maxNumber) {
         maxNumber = num;
-        updatePlayerMarker();
+        updatePlayerLine();
 
-        // Update comment box if new max beats a preset
         presetCards.forEach(card => {
           const presetValue = parseInt(card.dataset.value);
           if (maxNumber > presetValue) {
@@ -181,14 +214,13 @@
         });
       }
 
-      // 1 second cooldown
       generateBtn.disabled = true;
-      setTimeout(() => {
-        generateBtn.disabled = false;
-      }, 1000);
+      setTimeout(() => generateBtn.disabled = false, 1000);
     }
 
     generateBtn.addEventListener('click', generateNumber);
+    positionPresets();
+    window.addEventListener('resize', positionPresets); // keep alignment on resize
   </script>
 </body>
 </html>
