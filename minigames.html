@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minigames - The Maniac Zone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="top-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="letters.html">Letters</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="minigames.html">Minigames</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Minigames</h1>
+    <p>Choose a game to play!</p>
+  </header>
+
+  <!-- Games Grid -->
+  <main class="games-container">
+    <a href="game1.html" class="game-card">Game 1</a>
+    <a href="game2.html" class="game-card">Game 2</a>
+    <a href="game3.html" class="game-card">Game 3</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> The Maniac Zone / Arakdiel Minesweeping Company</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
