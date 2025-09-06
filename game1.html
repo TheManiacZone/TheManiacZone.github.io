@@ -72,9 +72,9 @@
     .preset {
       position: absolute;
       left: -80px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #333;
-      transform: translateY(50%);
+      transform: translateY(-50%);
     }
 
     /* Player horizontal line */
@@ -84,16 +84,14 @@
       width: 100%;
       height: 3px;
       background-color: #d94a67;
-      transform: translateY(-50%);
     }
 
     /* Player number label on right side */
     #player-number {
       position: absolute;
       left: 110%;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #d94a67;
-      transform: translateY(-50%);
     }
 
     /* Navigation fixes */
@@ -131,10 +129,11 @@
         <div class="preset" data-value="10000000">10,000,000</div>
         <div class="preset" data-value="17000000">17,000,000</div>
 
-        <div id="player-line"><span id="player-number">0</span></div>
+        <div id="player-line"></div>
+        <div id="player-number">0</div>
       </div>
 
-      <!-- Placeholder for commentary window or images -->
+      <!-- Placeholder for commentary window -->
       <div id="commentary-window"></div>
     </div>
   </div>
@@ -151,10 +150,10 @@
     let maxNumber = 0;
     const MAX_VALUE = 20000000;
 
-    // RNG harder (~2.5x harder)
     function getRandomNumber() {
       const rand = Math.random();
       let num;
+      // ~2.5x harder RNG
       if (rand < 0.86) { 
         num = Math.floor(Math.random() * 999000) + 1000;
       } else if (rand < 0.98) { 
@@ -168,7 +167,11 @@
     function updatePlayerLine() {
       const percent = Math.min(maxNumber / MAX_VALUE, 1);
       const barHeight = progressBar.clientHeight;
-      const yPos = percent * barHeight;
+      const lineHeight = playerLine.offsetHeight;
+      const textHeight = playerNumber.offsetHeight;
+
+      // subtract half of line and text to center them
+      const yPos = percent * barHeight - lineHeight/2 - textHeight/2;
 
       playerLine.style.bottom = `${yPos}px`;
       playerNumber.style.bottom = `${yPos}px`;
