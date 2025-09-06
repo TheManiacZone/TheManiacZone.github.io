@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
     body {
+      font-family: Georgia, serif;
       text-align: center;
     }
 
@@ -49,31 +50,46 @@
       min-height: 1.5em;
     }
 
-    /* Progress Bar */
-    #progress-bar {
+    /* Vertical Progress Bar */
+    #progress-bar-vertical {
       position: relative;
-      width: 100%;
-      height: 40px;
+      width: 140px;
+      height: 600px;
       background: #eef5ff;
-      border-radius: 20px;
-      margin-top: 30px;
+      margin: 30px auto;
+      border-radius: 10px;
+      padding: 10px 0;
     }
 
     .preset {
       position: absolute;
-      top: -20px;
-      font-size: 0.8rem;
+      left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .preset img {
+      width: 24px;
+      height: 24px;
     }
 
     #player-marker {
       position: absolute;
-      top: 0;
-      width: 6px;
-      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
       background-color: #d94a67;
-      border-radius: 3px;
-      transition: left 0.5s ease;
+      border-radius: 50%;
+      transition: bottom 0.5s ease;
+    }
+
+    /* Navigation fixes */
+    .top-nav ul {
+      justify-content: center;
+      gap: 30px;
     }
   </style>
 </head>
@@ -96,12 +112,23 @@
 
     <div id="comment-box"></div>
 
-    <div id="progress-bar">
-      <div class="preset" data-value="500000" style="left:2%;">Furina</div>
-      <div class="preset" data-value="2000000" style="left:10%;">Friend A</div>
-      <div class="preset" data-value="5000000" style="left:25%;">Friend B</div>
-      <div class="preset" data-value="10000000" style="left:50%;">Legendary</div>
-      <div class="preset" data-value="17000000" style="left:85%;">Ultimate</div>
+    <div id="progress-bar-vertical">
+      <!-- Example presets: you can add 20+ more -->
+      <div class="preset" data-value="500000" style="bottom:3%">
+        <img src="furina.png" alt="Furina"><span>Furina</span>
+      </div>
+      <div class="preset" data-value="2000000" style="bottom:10%">
+        <img src="friendA.png" alt="Friend A"><span>Friend A</span>
+      </div>
+      <div class="preset" data-value="5000000" style="bottom:25%">
+        <img src="friendB.png" alt="Friend B"><span>Friend B</span>
+      </div>
+      <div class="preset" data-value="10000000" style="bottom:50%">
+        <img src="legendary.png" alt="Legendary"><span>Legendary</span>
+      </div>
+      <div class="preset" data-value="17000000" style="bottom:85%">
+        <img src="ultimate.png" alt="Ultimate"><span>Ultimate</span>
+      </div>
       <div id="player-marker"></div>
     </div>
   </div>
@@ -112,6 +139,7 @@
     const commentBox = document.getElementById('comment-box');
     const presetCards = document.querySelectorAll('.preset');
     const playerMarker = document.getElementById('player-marker');
+    const progressBar = document.getElementById('progress-bar-vertical');
 
     let maxNumber = 0;
     const MAX_VALUE = 20000000; // top of the scale
@@ -119,22 +147,21 @@
     function getRandomNumber() {
       const rand = Math.random();
       let num;
-      if (rand < 0.6) {
-        // 60% chance: 1k–1M
+      // ~20% harder than previous version
+      if (rand < 0.72) { // 72% small
         num = Math.floor(Math.random() * 999000) + 1000;
-      } else if (rand < 0.9) {
-        // 30% chance: 1M–10M
+      } else if (rand < 0.94) { // 22% medium
         num = Math.floor(Math.random() * 9000000) + 1000000;
-      } else {
-        // 10% chance: 10M–20M
+      } else { // 6% large
         num = Math.floor(Math.random() * 10000000) + 10000000;
       }
       return num;
     }
 
     function updatePlayerMarker() {
-      const percent = Math.min(maxNumber / MAX_VALUE * 100, 100);
-      playerMarker.style.left = percent + '%';
+      const percent = Math.min(maxNumber / MAX_VALUE, 1);
+      const barHeight = progressBar.offsetHeight;
+      playerMarker.style.bottom = (percent * barHeight) + 'px';
     }
 
     function generateNumber() {
