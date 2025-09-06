@@ -18,7 +18,7 @@
     }
 
     #current-number {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin: 20px 0;
       color: #1a1a1a;
     }
@@ -55,7 +55,8 @@
       display: flex;
       justify-content: flex-start;
       margin: 30px auto;
-      gap: 60px; /* space for future commentary window on the right */
+      gap: 60px;
+      transform: translateX(-30px); /* shift the whole thing to the left */
     }
 
     #progress-bar-vertical {
@@ -64,14 +65,14 @@
       height: 600px;
       background: #eef5ff;
       border-radius: 10px;
-      margin-left: 40px; /* shift bar slightly to left */
+      margin-left: 40px;
     }
 
     /* Presets on left side of the bar */
     .preset {
       position: absolute;
-      left: -60px; /* move numbers to the left of the bar */
-      font-size: 0.8rem;
+      left: -80px; /* moved slightly more left for bigger font */
+      font-size: 1rem; /* increased font size */
       color: #333;
     }
 
@@ -87,8 +88,8 @@
     /* Player number label on right side */
     #player-number {
       position: absolute;
-      left: 110%; /* right side of the bar */
-      font-size: 0.9rem;
+      left: 110%;
+      font-size: 1.1rem; /* bigger font */
       color: #d94a67;
     }
 
@@ -147,14 +148,18 @@
     let maxNumber = 0;
     const MAX_VALUE = 20000000;
 
+    // RNG harder (~2.5x harder)
     function getRandomNumber() {
       const rand = Math.random();
       let num;
-      if (rand < 0.72) { 
+      if (rand < 0.86) { 
+        // more common small numbers
         num = Math.floor(Math.random() * 999000) + 1000;
-      } else if (rand < 0.94) { 
+      } else if (rand < 0.98) { 
+        // medium numbers rarer
         num = Math.floor(Math.random() * 9000000) + 1000000;
       } else { 
+        // very rare high numbers
         num = Math.floor(Math.random() * 10000000) + 10000000;
       }
       return num;
