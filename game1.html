@@ -53,8 +53,9 @@
     /* Vertical Progress Bar Container */
     #progress-bar-container {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       margin: 30px auto;
+      gap: 60px; /* space for future commentary window on the right */
     }
 
     #progress-bar-vertical {
@@ -63,13 +64,13 @@
       height: 600px;
       background: #eef5ff;
       border-radius: 10px;
-      margin-right: 60px; /* space for numbers on the side */
+      margin-left: 40px; /* shift bar slightly to left */
     }
 
-    /* Presets on side */
+    /* Presets on left side of the bar */
     .preset {
       position: absolute;
-      left: 60px;
+      left: -60px; /* move numbers to the left of the bar */
       font-size: 0.8rem;
       color: #333;
     }
@@ -83,9 +84,10 @@
       background-color: #d94a67;
     }
 
+    /* Player number label on right side */
     #player-number {
       position: absolute;
-      left: 110%;
+      left: 110%; /* right side of the bar */
       font-size: 0.9rem;
       color: #d94a67;
     }
@@ -127,6 +129,9 @@
 
         <div id="player-line"><span id="player-number">0</span></div>
       </div>
+
+      <!-- Placeholder for commentary window or images -->
+      <div id="commentary-window"></div>
     </div>
   </div>
 
@@ -145,7 +150,6 @@
     function getRandomNumber() {
       const rand = Math.random();
       let num;
-      // ~20% harder
       if (rand < 0.72) { 
         num = Math.floor(Math.random() * 999000) + 1000;
       } else if (rand < 0.94) { 
