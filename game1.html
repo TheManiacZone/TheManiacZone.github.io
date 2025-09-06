@@ -71,8 +71,8 @@
     /* Presets on left side of the bar */
     .preset {
       position: absolute;
-      left: -80px; /* moved slightly more left for bigger font */
-      font-size: 1rem; /* increased font size */
+      left: -80px;
+      font-size: 1rem;
       color: #333;
     }
 
@@ -89,8 +89,9 @@
     #player-number {
       position: absolute;
       left: 110%;
-      font-size: 1.1rem; /* bigger font */
+      font-size: 1.1rem;
       color: #d94a67;
+      transform: translateY(-50%); /* vertically center on line */
     }
 
     /* Navigation fixes */
@@ -153,13 +154,10 @@
       const rand = Math.random();
       let num;
       if (rand < 0.86) { 
-        // more common small numbers
         num = Math.floor(Math.random() * 999000) + 1000;
       } else if (rand < 0.98) { 
-        // medium numbers rarer
         num = Math.floor(Math.random() * 9000000) + 1000000;
       } else { 
-        // very rare high numbers
         num = Math.floor(Math.random() * 10000000) + 10000000;
       }
       return num;
@@ -169,7 +167,7 @@
       const percent = Math.min(maxNumber / MAX_VALUE, 1);
       const barHeight = progressBar.offsetHeight;
       playerLine.style.bottom = (percent * barHeight) + 'px';
-      playerNumber.style.bottom = (percent * barHeight - 10) + 'px';
+      playerNumber.style.bottom = (percent * barHeight) + 'px';
       playerNumber.textContent = maxNumber.toLocaleString();
     }
 
