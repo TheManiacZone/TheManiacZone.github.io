@@ -3,21 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game 1 - The Maniac Zone</title>
+  <title>Big Number RNG Game</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .game-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #current-number {
+      font-size: 3rem;
+      margin: 20px 0;
+      color: #1a1a1a;
+    }
+
+    button#generate-btn {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      transition: background 0.3s;
+    }
+
+    button#generate-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    button#generate-btn:hover:not(:disabled) {
+      background-color: #d94a67;
+    }
+
+    .preset-list {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .preset-card {
+      background-color: #eef5ff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      min-width: 150px;
+    }
+
+    #comment-box {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #d94a67;
+      min-height: 1.5em;
+    }
+  </style>
 </head>
 <body>
   <nav class="top-nav">
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="games.html">Back to Minigames</a></li>
+      <li><a href="index.html">🏠 Hub</a></li>
+      <li><a href="letters.html">✉️ Letters</a></li>
+      <li><a href="gallery.html">📸 Gallery</a></li>
+      <li><a href="games.html">🎮 Minigames</a></li>
     </ul>
   </nav>
 
-  <header>
-    <h1>Game 1</h1>
-    <p>The game will go here!</p>
-  </header>
-</body>
+  <div class="game-container">
+    <h1>Big Number RNG Game</h1>
+    <p>Click the button to generate a number! Higher numbers are rarer.</p>
 
+    <div id="current-number">0</div>
+    <button id="generate-btn">Generate Number</button>
+
+    <div id="comment-box"></div>
+
+    <div class="preset-list">
+      <div class="preset-card" data-value="500000">Furina's max damage: 500,000</div>
+      <div class="preset-card" data-value="2000000">Friend A's record: 2,000,000</div>
+      <div class="preset-card" data-value="5000000">Friend B's record: 5,000,000</div>
+      <div class="preset-card" data-value="10000000">Legendary max: 10,000,000</div>
+    </div>
+  </div>
+
+  <script>
+    const generateBtn = document.getElementById('generate-btn');
+    const currentNumberDisplay = document.getElementById('current-number');
+    const commentBox = document.getElementById('comment-box');
+    const presetCards = document.querySelectorAll('.preset-card');
+
+    let maxNumber = 0;
+
+    function generateNumber() {
+      // Biased RNG: higher numbers are rarer
+      const num = Math.floor(Math.pow(Math.random(), 2) * 20000000) + 1000;
+
+      currentNumberDisplay.textContent = num.toLocaleString();
+
+      if (num > maxNumber) {
+        maxNumber = num;
+
+        // Check against preset values
+        presetCards.forEach(card => {
+          const presetValue = parseInt(card.dataset.value);
+          if (maxNumber > presetValue) {
+            commentBox.textContent = `Wow! Your number is bigger than ${card.textContent.split(":")[0]}!`;
+          }
+        });
+      }
+
+      // 1 second cooldown
+      generateBtn.disabled = true;
+      setTimeout(() => {
+        generateBtn.disabled = false;
+      }, 1000);
+    }
+
+    generateBtn.addEventListener('click', generateNumber);
+  </script>
+</body>
 </html>
