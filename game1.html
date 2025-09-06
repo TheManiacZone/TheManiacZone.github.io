@@ -63,25 +63,15 @@
       height: 600px;
       background: #eef5ff;
       border-radius: 10px;
-      margin-right: 100px; /* space for images + numbers */
+      margin-right: 60px; /* space for numbers on the side */
     }
 
     /* Presets on side */
     .preset {
       position: absolute;
       left: 60px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .preset img {
-      width: 20px;
-      height: 20px;
-    }
-
-    .preset span {
       font-size: 0.8rem;
+      color: #333;
     }
 
     /* Player horizontal line */
@@ -128,27 +118,12 @@
 
     <div id="progress-bar-container">
       <div id="progress-bar-vertical">
-        <!-- Example presets -->
-        <div class="preset" data-value="500000">
-          <img src="furina.png" alt="Furina">
-          <span>500,000</span>
-        </div>
-        <div class="preset" data-value="2000000">
-          <img src="friendA.png" alt="Friend A">
-          <span>2,000,000</span>
-        </div>
-        <div class="preset" data-value="5000000">
-          <img src="friendB.png" alt="Friend B">
-          <span>5,000,000</span>
-        </div>
-        <div class="preset" data-value="10000000">
-          <img src="legendary.png" alt="Legendary">
-          <span>10,000,000</span>
-        </div>
-        <div class="preset" data-value="17000000">
-          <img src="ultimate.png" alt="Ultimate">
-          <span>17,000,000</span>
-        </div>
+        <!-- Presets -->
+        <div class="preset" data-value="500000">500,000</div>
+        <div class="preset" data-value="2000000">2,000,000</div>
+        <div class="preset" data-value="5000000">5,000,000</div>
+        <div class="preset" data-value="10000000">10,000,000</div>
+        <div class="preset" data-value="17000000">17,000,000</div>
 
         <div id="player-line"><span id="player-number">0</span></div>
       </div>
@@ -165,7 +140,7 @@
     const progressBar = document.getElementById('progress-bar-vertical');
 
     let maxNumber = 0;
-    const MAX_VALUE = 20000000; // top of the scale
+    const MAX_VALUE = 20000000;
 
     function getRandomNumber() {
       const rand = Math.random();
@@ -194,7 +169,7 @@
         const value = parseInt(card.dataset.value);
         const percent = Math.min(value / MAX_VALUE, 1);
         const barHeight = progressBar.offsetHeight;
-        card.style.bottom = (percent * barHeight - 10) + 'px'; // align nicely
+        card.style.bottom = (percent * barHeight - 10) + 'px';
       });
     }
 
@@ -220,7 +195,7 @@
 
     generateBtn.addEventListener('click', generateNumber);
     positionPresets();
-    window.addEventListener('resize', positionPresets); // keep alignment on resize
+    window.addEventListener('resize', positionPresets);
   </script>
 </body>
 </html>
